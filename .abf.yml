@@ -1,0 +1,3 @@
+sources:
+  grolifant-5.12.7.tar.gz: 8b34d87bfb0ed39aa76ab6a59f0fe42d9a83aa50
+  grolifant-gradle8-constructors.patch: 089158c970955836cd494b6de0927033ddf2b927

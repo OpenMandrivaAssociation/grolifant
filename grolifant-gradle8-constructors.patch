@@ -1,0 +1,24 @@
+--- a/grolifant-core/src/main/groovy/org/ysb33r/grolifant5/api/errors/UnknownStateObjectException.groovy
++++ b/grolifant-core/src/main/groovy/org/ysb33r/grolifant5/api/errors/UnknownStateObjectException.groovy
+@@ -10,7 +10,6 @@
+ package org.ysb33r.grolifant5.api.errors
+ 
+ import groovy.transform.CompileStatic
+-import groovy.transform.InheritConstructors
+ import org.gradle.api.UnknownDomainObjectException
+ 
+ /**
+@@ -19,6 +18,12 @@
+  * @since 5.0
+  */
+ @CompileStatic
+-@InheritConstructors
+ class UnknownStateObjectException extends UnknownDomainObjectException implements GrolifantError {
++    UnknownStateObjectException(String message) {
++        super(message)
++    }
++
++    UnknownStateObjectException(String message, Throwable cause) {
++        super(message, cause)
++    }
+ }
