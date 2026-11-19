@@ -1,11 +1,11 @@
 Name:		grolifant
-Version:	5.12.7
+Version:	5.13.0
 Release:	1
 Summary:	Support library for Gradle plugins
 Group:		Development/Java
 License:	MPL-2.0
 URL:		https://gitlab.com/ysb33rOrg/gradle/grolifant
-# Tag RELEASE_5_12_7. asciidoctor5-jvm-core-plugin 5.1.0 compiles
+# Tag RELEASE_5_13_0. asciidoctor5-jvm-core-plugin 5.1.0 compiles
 # against grolifant5-core and loads grolifant5-rawhide at runtime.
 # Upstream builds with Gradle. This package compiles the main sources
 # with Groovy's FileSystemCompiler. The Gradle tool is not invoked.
@@ -37,7 +37,7 @@ snake case. The main sources are compiled with FileSystemCompiler
 at bytecode 11. The Gradle tool is not invoked.
 
 %prep
-%autosetup -n grolifant-RELEASE_5_12_7 -p1
+%autosetup -n grolifant-RELEASE_5_13_0 -p1
 find . -type f \( -name '*.jar' -o -name '*.class' -o -name '*.so' -o -name '*.node' -o -name '*.wasm' \) -print > binaries.list
 find . -type d -name '*.jar' -print >> binaries.list
 if [ -s binaries.list ]; then
@@ -46,9 +46,9 @@ if [ -s binaries.list ]; then
 fi
 find grolifant-core/src/main -type f \( -name '*.groovy' -o -name '*.java' \) | sort > core.list
 find grolifant-rawhide/src/main -type f \( -name '*.groovy' -o -name '*.java' \) | sort > rawhide.list
-test "$(wc -l < core.list)" -eq 257
-test "$(grep -c '\.groovy$' core.list)" -eq 136
-test "$(grep -c '\.java$' core.list)" -eq 121
+test "$(wc -l < core.list)" -eq 259
+test "$(grep -c '\.groovy$' core.list)" -eq 137
+test "$(grep -c '\.java$' core.list)" -eq 122
 test "$(wc -l < rawhide.list)" -eq 8
 test "$(grep -c '\.groovy$' rawhide.list)" -eq 4
 test "$(grep -c '\.java$' rawhide.list)" -eq 4
@@ -107,7 +107,7 @@ src_cp=$gradle_cp:%{_javadir}/commons-io.jar:%{_javadir}/ant.jar:grolifant5-rawh
 mkdir -p core-classes
 java -Dgroovy.target.bytecode=11 -cp "$tool_cp:$src_cp" org.codehaus.groovy.tools.FileSystemCompiler \
 	--classpath "$src_cp" -j '-J-release=11' -d core-classes @core.list
-test "$(find core-classes -name '*.class' | wc -l)" -eq 528
+test "$(find core-classes -name '*.class' | wc -l)" -eq 536
 javap -v -classpath core-classes org.ysb33r.grolifant5.api.core.CaseFormats | grep -F -q 'major version: 55'
 javap -v -classpath core-classes org.ysb33r.grolifant5.api.core.StringTools | grep -F -q 'major version: 55'
 javap -v -classpath core-classes org.ysb33r.grolifant5.api.errors.UnknownStateObjectException | grep -F -q 'major version: 55'
@@ -151,7 +151,7 @@ cat > grolifant5-rawhide.pom << 'END'
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.ysb33r.gradle</groupId>
   <artifactId>grolifant5-rawhide</artifactId>
-  <version>5.12.7</version>
+  <version>%{version}</version>
   <name>grolifant5-rawhide</name>
   <description>Worker execution helpers for Grolifant.</description>
   <url>https://gitlab.com/ysb33rOrg/gradle/grolifant</url>
@@ -170,7 +170,7 @@ cat > grolifant5-core.pom << 'END'
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.ysb33r.gradle</groupId>
   <artifactId>grolifant5-core</artifactId>
-  <version>5.12.7</version>
+  <version>%{version}</version>
   <name>grolifant5-core</name>
   <description>Building blocks for Gradle plugins.</description>
   <url>https://gitlab.com/ysb33rOrg/gradle/grolifant</url>
@@ -184,7 +184,7 @@ cat > grolifant5-core.pom << 'END'
     <dependency>
       <groupId>org.ysb33r.gradle</groupId>
       <artifactId>grolifant5-rawhide</artifactId>
-      <version>5.12.7</version>
+      <version>%{version}</version>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
@@ -211,7 +211,7 @@ cat > grolifant5-herd.pom << 'END'
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.ysb33r.gradle</groupId>
   <artifactId>grolifant5-herd</artifactId>
-  <version>5.12.7</version>
+  <version>%{version}</version>
   <name>grolifant5-herd</name>
   <description>Version marker for the Grolifant herd.</description>
   <url>https://gitlab.com/ysb33rOrg/gradle/grolifant</url>

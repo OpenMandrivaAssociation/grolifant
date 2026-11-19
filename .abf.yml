@@ -1,3 +1,5 @@
 sources:
-  grolifant-5.12.7.tar.gz: 8b34d87bfb0ed39aa76ab6a59f0fe42d9a83aa50
   grolifant-gradle8-constructors.patch: 089158c970955836cd494b6de0927033ddf2b927
+  grolifant-5.13.0.tar.gz: a34483d590b964e241ec0e016243b75c3ffeab30
+removed_sources:
+  grolifant-5.12.7.tar.gz: 8b34d87bfb0ed39aa76ab6a59f0fe42d9a83aa50
